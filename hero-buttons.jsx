@@ -17,12 +17,6 @@ function HeroButtons() {
       }}>
         <LiquidMetalButton label="How It Works" />
       </a>
-      <a href="#how-it-works" style={{ textDecoration: "none" }} onClick={(e) => {
-        e.preventDefault();
-        document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
-      }}>
-        <LiquidMetalButton viewMode="icon" />
-      </a>
     </div>
   );
 }
