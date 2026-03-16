@@ -3,13 +3,15 @@ import { Heatmap } from "@paper-design/shaders-react";
 
 const LOGO_URL = "/Nolimitslogo.png";
 
-const HEATMAP_COLORS = [
-  "#0f172a",
-  "#1e3a5f",
-  "#166534",
-  "#4ade80",
-  "#86efac",
-  "#bbf7d0",
+/* Cult UI Hero Heatmap exact palette — deep blue → teal → lime → yellow → orange → magenta */
+const CULT_UI_HEATMAP_COLORS = [
+  "#112069",
+  "#1f3ca3",
+  "#367c66",
+  "#adfa1e",
+  "#ffe77a",
+  "#ff9a1f",
+  "#ed40b3",
 ];
 
 export function PreloaderHeatmap() {
@@ -18,17 +20,17 @@ export function PreloaderHeatmap() {
       <div className="preloader-heatmap-wrap">
         <Heatmap
           image={LOGO_URL}
-          colors={HEATMAP_COLORS}
-          colorBack="#0a0a0a"
+          colors={CULT_UI_HEATMAP_COLORS}
+          colorBack="#000000"
           contour={0.5}
           angle={0}
           noise={0}
-          innerGlow={0.6}
+          innerGlow={0.5}
           outerGlow={0.5}
           speed={1}
-          scale={0.8}
-          width={400}
-          height={400}
+          scale={0.75}
+          width={512}
+          height={512}
           style={{
             width: "100%",
             height: "100%",
