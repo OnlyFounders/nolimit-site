@@ -2,6 +2,7 @@ import "./js/main.js";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { LiquidMetalButton } from "./components/ui/liquid-metal-button.jsx";
+import { PreloaderHeatmap } from "./components/ui/preloader-heatmap.jsx";
 
 const STRIPE_URL = "https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00";
 
@@ -30,6 +31,12 @@ function NavCta() {
 }
 
 function mount() {
+  const preloaderEl = document.getElementById("preloader-root");
+  if (preloaderEl) {
+    preloaderEl.innerHTML = "";
+    createRoot(preloaderEl).render(<PreloaderHeatmap />);
+  }
+
   const heroEl = document.getElementById("hero-buttons-root");
   if (heroEl) {
     heroEl.innerHTML = "";
