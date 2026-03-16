@@ -3,6 +3,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { LiquidMetalButton } from "./components/ui/liquid-metal-button.jsx";
 import { PreloaderHeatmap } from "./components/ui/preloader-heatmap.jsx";
+import { ScarcityTag } from "./components/ui/scarcity-tag.jsx";
 import { TextEffect } from "./components/ui/text-effect.jsx";
 
 const STRIPE_URL = "https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00";
@@ -135,6 +136,12 @@ function mount() {
   if (heroEl) {
     heroEl.innerHTML = "";
     createRoot(heroEl).render(<HeroButtons />);
+  }
+
+  const scarcityEl = document.getElementById("hero-scarcity-root");
+  if (scarcityEl) {
+    scarcityEl.innerHTML = "";
+    createRoot(scarcityEl).render(<ScarcityTag />);
   }
 
   const navEl = document.getElementById("nav-cta-root");

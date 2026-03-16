@@ -145,6 +145,86 @@
   box-shadow: 0 0 12px var(--accent-green);
   animation: pulse-dot 2s ease-in-out infinite;
 }
+
+/* Scarcity tag pill — LocationTag-style design */
+.scarcity-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.scarcity-tag-pill:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
+}
+
+.scarcity-tag-pulse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.scarcity-tag-pulse-outer {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  opacity: 0.75;
+  animation: scarcity-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.scarcity-tag-pulse-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+}
+@keyframes scarcity-ping {
+  75%, 100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.scarcity-tag-text-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 1.2em;
+  display: flex;
+  align-items: center;
+}
+.scarcity-tag-text {
+  display: block;
+  white-space: nowrap;
+  transition: transform 0.4s ease-out, opacity 0.4s;
+}
+.scarcity-tag-text-hover {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.scarcity-tag-arrow {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.scarcity-tag-pill:hover .scarcity-tag-arrow {
+  color: var(--text-primary);
+}
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--accent-green); }
   50% { opacity: 0.5; box-shadow: 0 0 4px var(--accent-green); }
