@@ -23,8 +23,8 @@ function HeroButtons() {
 
 function NavCta() {
   return (
-    <a href={STRIPE_URL} style={{ textDecoration: "none", display: "inline-block", transform: "scale(0.7)", transformOrigin: "center center" }}>
-      <LiquidMetalButton label="Pre-Order" />
+    <a href={STRIPE_URL} style={{ textDecoration: "none" }}>
+      <LiquidMetalButton label="Pre-Order" size="nav" />
     </a>
   );
 }

@@ -5,6 +5,7 @@ export function LiquidMetalButton({
   label = "Get Started",
   onClick,
   viewMode = "text",
+  size = "default", // "default" | "sm" | "nav"
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -21,14 +22,20 @@ export function LiquidMetalButton({
         innerWidth: 42, innerHeight: 42,
         shaderWidth: 46, shaderHeight: 46,
       };
-    } else {
+    }
+    if (size === "nav") {
       return {
-        width: 142, height: 46,
-        innerWidth: 138, innerHeight: 42,
-        shaderWidth: 142, shaderHeight: 46,
+        width: 100, height: 36,
+        innerWidth: 96, innerHeight: 32,
+        shaderWidth: 100, shaderHeight: 36,
       };
     }
-  }, [viewMode]);
+    return {
+      width: 142, height: 46,
+      innerWidth: 138, innerHeight: 42,
+      shaderWidth: 142, shaderHeight: 46,
+    };
+  }, [viewMode, size]);
 
   useEffect(() => {
     const styleId = "shader-canvas-style-exploded";
@@ -194,12 +201,15 @@ export function LiquidMetalButton({
             {viewMode === "text" && (
               <span
                 style={{
-                  fontSize: "14px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: size === "nav" ? "11px" : "14px",
                   color: "#ffffff",
                   fontWeight: 400,
+                  lineHeight: 1,
                   textShadow: "0px 1px 2px rgba(0, 0, 0, 0.5)",
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                  transform: "scale(1)",
                   whiteSpace: "nowrap",
                 }}
               >
