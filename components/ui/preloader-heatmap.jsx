@@ -17,21 +17,21 @@ const CULT_UI_HEATMAP_COLORS = [
 export function PreloaderHeatmap() {
   return (
     <div className="preloader-content">
-      <div className="preloader-heatmap-wrap">
+      <div className="preloader-heatmap-bg">
         <Heatmap
           image={LOGO_URL}
           colors={CULT_UI_HEATMAP_COLORS}
           colorBack="#000000"
-          contour={0.5}
+          contour={0.6}
           angle={0}
-          noise={0}
-          innerGlow={0.6}
-          outerGlow={0}
-          speed={1}
+          noise={0.05}
+          innerGlow={0.55}
+          outerGlow={0.48}
+          speed={1.1}
           scale={0.85}
           offsetY={-0.05}
-          width={512}
-          height={512}
+          width={1280}
+          height={720}
           style={{
             width: "100%",
             height: "100%",
