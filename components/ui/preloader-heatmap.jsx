@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Heatmap } from "@paper-design/shaders-react";
 
 const LOGO_URL = "/Nolimitslogo.png";
+
+/* Target frame when pattern is black (reachable in ~4.5s from -2800 at speed 1.1) */
+const TARGET_FRAME = 2100;
+const DECEL_START_OFFSET = 2500; /* start slowing this many ms before target */
+const FULL_SPEED = 1.1;
+const MIN_SPEED = 0.02;
 
 /* Cult UI Hero Heatmap exact palette — deep blue → teal → lime → yellow → orange → magenta */
 const CULT_UI_HEATMAP_COLORS = [
@@ -15,9 +21,43 @@ const CULT_UI_HEATMAP_COLORS = [
 ];
 
 export function PreloaderHeatmap() {
+  const heatmapRef = useRef(null);
+
+  useEffect(() => {
+    let rafId;
+    const runDecel = () => {
+      const el = heatmapRef.current?.querySelector?.("[data-paper-shader]");
+      const mount = el?.paperShaderMount;
+      if (!mount) {
+        rafId = requestAnimationFrame(runDecel);
+        return;
+      }
+      const decelStartFrame = TARGET_FRAME - DECEL_START_OFFSET;
+      const tick = () => {
+        const frame = mount.getCurrentFrame();
+        if (frame >= TARGET_FRAME) {
+          mount.setSpeed(0);
+          return;
+        }
+        if (frame < decelStartFrame) {
+          mount.setSpeed(FULL_SPEED);
+        } else {
+          const decelProgress = (frame - decelStartFrame) / DECEL_START_OFFSET;
+          const easeOut = 1 - (1 - Math.min(1, decelProgress)) ** 3;
+          const speed = FULL_SPEED * (1 - easeOut) + MIN_SPEED * easeOut;
+          mount.setSpeed(speed);
+        }
+        rafId = requestAnimationFrame(tick);
+      };
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(runDecel);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
   return (
     <div className="preloader-content">
-      <div className="preloader-heatmap-bg">
+      <div className="preloader-heatmap-bg" ref={heatmapRef}>
         <Heatmap
           image={LOGO_URL}
           colors={CULT_UI_HEATMAP_COLORS}
