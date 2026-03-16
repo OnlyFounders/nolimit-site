@@ -3,7 +3,7 @@ import { Heatmap } from "@paper-design/shaders-react";
 
 const LOGO_URL = "/Nolimitslogo.png";
 
-/* Target frame when pattern is black (reachable in ~4.5s from -2800 at speed 1.1) */
+/* Target frame when pattern is black */
 const TARGET_FRAME = 2100;
 const DECEL_START_OFFSET = 2500; /* start slowing this many ms before target */
 const FULL_SPEED = 1.1;
@@ -65,7 +65,7 @@ export function PreloaderHeatmap() {
           contour={0.6}
           angle={0}
           noise={0.05}
-          frame={-2800}
+          frame={-1800}
           innerGlow={0.55}
           outerGlow={0.30}
           speed={1.1}
