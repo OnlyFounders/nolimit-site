@@ -94,6 +94,11 @@ body.preloader-active .grain { visibility: hidden; }
 .preloader-word span:nth-child(6) { animation-delay: 1.10s; }
 .preloader-word span:nth-child(7) { animation-delay: 1.17s; }
 
+/* ── Mobile: raise NOLIMIT text ── */
+@media (max-width: 640px) {
+  .preloader-word { bottom: 32vh; }
+}
+
 @keyframes pl-letter {
   from { opacity: 0; filter: blur(12px); transform: translateY(16px); }
   to   { opacity: 1; filter: blur(0);   transform: translateY(0); }

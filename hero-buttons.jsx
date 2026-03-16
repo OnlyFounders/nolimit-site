@@ -29,7 +29,7 @@ function CtaButtons() {
   );
 }
 
-const PRELOADER_DURATION_MS = 5500;
+const PRELOADER_DURATION_MS = 3000;
 
 const lineVariants = {
   container: {
