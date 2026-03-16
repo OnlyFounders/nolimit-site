@@ -47,6 +47,10 @@
   transition: color 0.3s;
 }
 .nav-links a:hover { color: var(--text-primary); }
+#nav-cta-root {
+  display: flex;
+  align-items: center;
+}
 .nav-cta {
   font-size: 13px !important;
   font-weight: 600 !important;

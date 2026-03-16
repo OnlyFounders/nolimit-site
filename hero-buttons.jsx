@@ -21,15 +21,25 @@ function HeroButtons() {
   );
 }
 
+function NavCta() {
+  return (
+    <a href={STRIPE_URL} style={{ textDecoration: "none" }}>
+      <LiquidMetalButton label="Pre-Order" />
+    </a>
+  );
+}
+
 function mount() {
-  const el = document.getElementById("hero-buttons-root");
-  if (!el) return;
-  el.innerHTML = "";
-  try {
-    createRoot(el).render(<HeroButtons />);
-    console.log("[HeroButtons] mounted OK");
-  } catch (err) {
-    console.error("[HeroButtons] mount failed:", err);
+  const heroEl = document.getElementById("hero-buttons-root");
+  if (heroEl) {
+    heroEl.innerHTML = "";
+    createRoot(heroEl).render(<HeroButtons />);
+  }
+
+  const navEl = document.getElementById("nav-cta-root");
+  if (navEl) {
+    navEl.innerHTML = "";
+    createRoot(navEl).render(<NavCta />);
   }
 }
 
