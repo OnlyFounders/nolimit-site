@@ -5,7 +5,8 @@ export function LiquidMetalButton({
   label = "Get Started",
   onClick,
   viewMode = "text",
-  size = "default", // "default" | "sm" | "nav"
+  size = "default", // "default" | "sm" | "lg" | "nav"
+  href,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -28,6 +29,13 @@ export function LiquidMetalButton({
         width: 100, height: 36,
         innerWidth: 96, innerHeight: 32,
         shaderWidth: 100, shaderHeight: 36,
+      };
+    }
+    if (size === "lg") {
+      return {
+        width: 270, height: 51,
+        innerWidth: 266, innerHeight: 47,
+        shaderWidth: 270, shaderHeight: 51,
       };
     }
     return {
@@ -73,8 +81,8 @@ export function LiquidMetalButton({
         );
 
         if (shaderRef.current) {
-          if (shaderMount.current?.destroy) {
-            shaderMount.current.destroy();
+          if (shaderMount.current?.dispose) {
+            shaderMount.current.dispose();
           }
 
           shaderMount.current = new ShaderMount(
@@ -105,8 +113,8 @@ export function LiquidMetalButton({
     loadShader();
 
     return () => {
-      if (shaderMount.current?.destroy) {
-        shaderMount.current.destroy();
+      if (shaderMount.current?.dispose) {
+        shaderMount.current.dispose();
         shaderMount.current = null;
       }
     };
@@ -123,30 +131,33 @@ export function LiquidMetalButton({
     shaderMount.current?.setSpeed?.(0.6);
   };
 
-  const handleClick = (e) => {
-    if (shaderMount.current?.setSpeed) {
-      shaderMount.current.setSpeed(2.4);
-      setTimeout(() => {
-        if (isHovered) {
-          shaderMount.current?.setSpeed?.(1);
-        } else {
-          shaderMount.current?.setSpeed?.(0.6);
-        }
-      }, 300);
-    }
-
+  const triggerRipple = (e) => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const ripple = { x, y, id: rippleId.current++ };
-
       setRipples((prev) => [...prev, ripple]);
-      setTimeout(() => {
-        setRipples((prev) => prev.filter((r) => r.id !== ripple.id));
-      }, 600);
+      setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== ripple.id)), 600);
     }
+    if (shaderMount.current?.setSpeed) {
+      shaderMount.current.setSpeed(2.4);
+      setTimeout(() => {
+        shaderMount.current?.setSpeed?.(isHovered ? 1 : 0.6);
+      }, 300);
+    }
+  };
 
+  const handleClick = (e) => {
+    triggerRipple(e);
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    } else if (href && !href.startsWith("mailto:")) {
+      window.location.href = href;
+    } else if (href?.startsWith("mailto:")) {
+      window.location.href = href;
+    }
     onClick?.();
   };
 
@@ -204,7 +215,7 @@ export function LiquidMetalButton({
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: size === "nav" ? "11px" : "14px",
+                  fontSize: size === "nav" ? "11px" : size === "lg" ? "13px" : "14px",
                   color: "#ffffff",
                   fontWeight: 400,
                   lineHeight: 1,
@@ -292,6 +303,7 @@ export function LiquidMetalButton({
           </div>
 
           <button
+            type="button"
             ref={buttonRef}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}

@@ -9,24 +9,22 @@ const STRIPE_URL = "https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00";
 function HeroButtons() {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "center" }}>
-      <a href={STRIPE_URL} style={{ textDecoration: "none" }}>
-        <LiquidMetalButton label="Pre-Order" />
-      </a>
-      <a href="#how-it-works" style={{ textDecoration: "none" }} onClick={(e) => {
-        e.preventDefault();
-        document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
-      }}>
-        <LiquidMetalButton label="How It Works" />
-      </a>
+      <LiquidMetalButton label="Pre-Order" href={STRIPE_URL} />
+      <LiquidMetalButton label="How It Works" href="#how-it-works" />
     </div>
   );
 }
 
 function NavCta() {
+  return <LiquidMetalButton label="Pre-Order" size="nav" href={STRIPE_URL} />;
+}
+
+function CtaButtons() {
   return (
-    <a href={STRIPE_URL} style={{ textDecoration: "none" }}>
-      <LiquidMetalButton label="Pre-Order" size="nav" />
-    </a>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", alignItems: "center" }}>
+      <LiquidMetalButton label="Join the Founders Edition" size="lg" href={STRIPE_URL} />
+      <LiquidMetalButton label="Contact Us" href="mailto:contact@nolimit.pro" />
+    </div>
   );
 }
 
@@ -47,6 +45,12 @@ function mount() {
   if (navEl) {
     navEl.innerHTML = "";
     createRoot(navEl).render(<NavCta />);
+  }
+
+  const ctaEl = document.getElementById("cta-buttons-root");
+  if (ctaEl) {
+    ctaEl.innerHTML = "";
+    createRoot(ctaEl).render(<CtaButtons />);
   }
 }
 
