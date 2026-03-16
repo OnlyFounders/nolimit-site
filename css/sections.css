@@ -121,6 +121,12 @@
   flex-wrap: wrap;
   margin-bottom: 32px;
 }
+#hero-buttons-root {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 .hero-scarcity {
   font-family: var(--font-mono);
   font-size: 13px;

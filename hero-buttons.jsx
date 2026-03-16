@@ -1,0 +1,46 @@
+import "./js/main.js";
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { LiquidMetalButton } from "./components/ui/liquid-metal-button.jsx";
+
+const STRIPE_URL = "https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00";
+
+function HeroButtons() {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "center" }}>
+      <a href={STRIPE_URL} style={{ textDecoration: "none" }}>
+        <LiquidMetalButton label="Pre-Order" />
+      </a>
+      <a href="#how-it-works" style={{ textDecoration: "none" }} onClick={(e) => {
+        e.preventDefault();
+        document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
+      }}>
+        <LiquidMetalButton label="How It Works" />
+      </a>
+      <a href="#how-it-works" style={{ textDecoration: "none" }} onClick={(e) => {
+        e.preventDefault();
+        document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
+      }}>
+        <LiquidMetalButton viewMode="icon" />
+      </a>
+    </div>
+  );
+}
+
+function mount() {
+  const el = document.getElementById("hero-buttons-root");
+  if (!el) return;
+  el.innerHTML = "";
+  try {
+    createRoot(el).render(<HeroButtons />);
+    console.log("[HeroButtons] mounted OK");
+  } catch (err) {
+    console.error("[HeroButtons] mount failed:", err);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", mount);
+} else {
+  mount();
+}
