@@ -49,7 +49,7 @@ body.preloader-active .grain { visibility: hidden; }
   height: 100%;
   z-index: 0;
   opacity: 0;
-  animation: pl-logo 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  animation: pl-logo 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
   background: #000000;
 }
 
@@ -75,8 +75,8 @@ body.preloader-active .grain { visibility: hidden; }
 }
 
 @keyframes pl-logo {
-  from { opacity: 0; filter: blur(8px); transform: translateY(8px); }
-  to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
+  from { opacity: 0; filter: blur(20px); transform: translateY(24px) scale(0.94); }
+  to   { opacity: 1; filter: blur(0);   transform: translateY(0) scale(1); }
 }
 
 .preloader-word span {
@@ -85,16 +85,16 @@ body.preloader-active .grain { visibility: hidden; }
   animation: pl-letter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Staggered delays — 70ms apart, starts after logo */
-.preloader-word span:nth-child(1) { animation-delay: 0.45s; }
-.preloader-word span:nth-child(2) { animation-delay: 0.52s; }
-.preloader-word span:nth-child(3) { animation-delay: 0.59s; }
-.preloader-word span:nth-child(4) { animation-delay: 0.66s; }
-.preloader-word span:nth-child(5) { animation-delay: 0.73s; }
-.preloader-word span:nth-child(6) { animation-delay: 0.80s; }
-.preloader-word span:nth-child(7) { animation-delay: 0.87s; }
+/* Staggered delays — 65ms apart, starts after logo settles */
+.preloader-word span:nth-child(1) { animation-delay: 0.75s; }
+.preloader-word span:nth-child(2) { animation-delay: 0.82s; }
+.preloader-word span:nth-child(3) { animation-delay: 0.89s; }
+.preloader-word span:nth-child(4) { animation-delay: 0.96s; }
+.preloader-word span:nth-child(5) { animation-delay: 1.03s; }
+.preloader-word span:nth-child(6) { animation-delay: 1.10s; }
+.preloader-word span:nth-child(7) { animation-delay: 1.17s; }
 
 @keyframes pl-letter {
-  from { opacity: 0; filter: blur(8px); transform: translateY(12px); }
+  from { opacity: 0; filter: blur(12px); transform: translateY(16px); }
   to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
 }
