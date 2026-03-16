@@ -82,17 +82,17 @@ body.preloader-active .grain { visibility: hidden; }
 .preloader-word span {
   opacity: 0;
   display: inline-block;
-  animation: pl-letter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: pl-letter 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Staggered delays — 65ms apart, starts after logo settles */
-.preloader-word span:nth-child(1) { animation-delay: 0.75s; }
-.preloader-word span:nth-child(2) { animation-delay: 0.82s; }
-.preloader-word span:nth-child(3) { animation-delay: 0.89s; }
-.preloader-word span:nth-child(4) { animation-delay: 0.96s; }
-.preloader-word span:nth-child(5) { animation-delay: 1.03s; }
-.preloader-word span:nth-child(6) { animation-delay: 1.10s; }
-.preloader-word span:nth-child(7) { animation-delay: 1.17s; }
+/* Staggered delays — 95ms apart, starts at 0.45s */
+.preloader-word span:nth-child(1) { animation-delay: 0.45s; }
+.preloader-word span:nth-child(2) { animation-delay: 0.545s; }
+.preloader-word span:nth-child(3) { animation-delay: 0.64s; }
+.preloader-word span:nth-child(4) { animation-delay: 0.735s; }
+.preloader-word span:nth-child(5) { animation-delay: 0.83s; }
+.preloader-word span:nth-child(6) { animation-delay: 0.925s; }
+.preloader-word span:nth-child(7) { animation-delay: 1.02s; }
 
 /* ── Mobile: raise NOLIMIT text ── */
 @media (max-width: 640px) {
@@ -100,6 +100,6 @@ body.preloader-active .grain { visibility: hidden; }
 }
 
 @keyframes pl-letter {
-  from { opacity: 0; filter: blur(12px); transform: translateY(16px); }
+  from { opacity: 0; filter: blur(10px); transform: translateY(12px); }
   to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
 }
