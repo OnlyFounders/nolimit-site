@@ -31,37 +31,70 @@ function CtaButtons() {
 
 const PRELOADER_DURATION_MS = 5500;
 
+const lineVariants = {
+  container: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  },
+  item: {
+    hidden: { opacity: 0, filter: 'blur(12px)', y: 24 },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  },
+};
+
 function HeroHeadline() {
+  const baseDelay = PRELOADER_DURATION_MS / 1000 + 0.3;
   return (
-    <TextEffect
-      per="line"
-      as="h1"
-      delay={PRELOADER_DURATION_MS / 1000 + 0.3}
-      className="hero-headline-text"
-      segmentWrapperClassName="overflow-hidden block"
-      variants={{
-        container: {
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.15 },
-          },
-        },
-        item: {
-          hidden: { opacity: 0, filter: 'blur(12px)', y: 24 },
-          visible: {
-            opacity: 1,
-            filter: 'blur(0px)',
-            y: 0,
-            transition: { duration: 0.5 },
-          },
-        },
-      }}
-    >
-      {`Train With
-Muscle-Level
-Intelligence.`}
-    </TextEffect>
+    <h1 className="hero-headline reveal reveal-delay-1 visible">
+      <span className="block overflow-hidden">
+        <TextEffect
+          per="word"
+          as="span"
+          delay={baseDelay}
+          preset="blur"
+          segmentWrapperClassName="inline-block"
+          variants={lineVariants}
+        >
+          Train With
+        </TextEffect>
+      </span>
+      <br />
+      <span className="block overflow-hidden">
+        <TextEffect
+          per="word"
+          as="span"
+          delay={baseDelay + 0.15}
+          preset="blur"
+          segmentWrapperClassName="inline-block"
+          variants={lineVariants}
+        >
+          Muscle-Level
+        </TextEffect>
+      </span>
+      <br />
+      <em>
+        <span className="block overflow-hidden">
+          <TextEffect
+            per="word"
+            as="span"
+            delay={baseDelay + 0.3}
+            preset="blur"
+            segmentWrapperClassName="inline-block"
+            variants={lineVariants}
+          >
+            Intelligence.
+          </TextEffect>
+        </span>
+      </em>
+    </h1>
   );
 }
 
@@ -72,7 +105,7 @@ function HeroBody() {
       as="p"
       preset="blur"
       delay={PRELOADER_DURATION_MS / 1000 + 0.6}
-      className="hero-body-text"
+      className="hero-body"
     >
       NOLIMIT integrates EMG, motion tracking and AI directly into elite compression wear. Track fatigue. Prevent injury. Unlock performance.
     </TextEffect>
