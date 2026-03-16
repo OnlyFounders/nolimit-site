@@ -20,14 +20,35 @@ body.preloader-active { overflow: hidden; }
   visibility: hidden;
 }
 
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.preloader-logo {
+  max-width: clamp(120px, 20vw, 200px);
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  animation: pl-logo 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
 .preloader-word {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(32px, 5vw, 56px);
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--text-primary);
   display: flex;
+}
+
+@keyframes pl-logo {
+  from { opacity: 0; filter: blur(8px); transform: translateY(8px); }
+  to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
 }
 
 .preloader-word span {
@@ -36,14 +57,14 @@ body.preloader-active { overflow: hidden; }
   animation: pl-letter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Staggered delays — 70ms apart */
-.preloader-word span:nth-child(1) { animation-delay: 0.05s; }
-.preloader-word span:nth-child(2) { animation-delay: 0.12s; }
-.preloader-word span:nth-child(3) { animation-delay: 0.19s; }
-.preloader-word span:nth-child(4) { animation-delay: 0.26s; }
-.preloader-word span:nth-child(5) { animation-delay: 0.33s; }
-.preloader-word span:nth-child(6) { animation-delay: 0.40s; }
-.preloader-word span:nth-child(7) { animation-delay: 0.47s; }
+/* Staggered delays — 70ms apart, starts after logo */
+.preloader-word span:nth-child(1) { animation-delay: 0.45s; }
+.preloader-word span:nth-child(2) { animation-delay: 0.52s; }
+.preloader-word span:nth-child(3) { animation-delay: 0.59s; }
+.preloader-word span:nth-child(4) { animation-delay: 0.66s; }
+.preloader-word span:nth-child(5) { animation-delay: 0.73s; }
+.preloader-word span:nth-child(6) { animation-delay: 0.80s; }
+.preloader-word span:nth-child(7) { animation-delay: 0.87s; }
 
 @keyframes pl-letter {
   from { opacity: 0; filter: blur(8px); transform: translateY(12px); }
