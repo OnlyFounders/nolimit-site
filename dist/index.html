@@ -12,16 +12,14 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap"></noscript>
 
 <!-- Styles -->
-  <script type="module" crossorigin src="/assets/main-Cxo7t20r.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-DEK8lSUB.css">
+  <script type="module" crossorigin src="/assets/main-B4Fesn0e.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CZrchk1c.css">
 </head>
 <body class="preloader-active">
 
 <!-- ── Preloader ── -->
 <div class="preloader" id="preloader">
-  <div class="preloader-word">
-    <span>N</span><span>O</span><span>L</span><span>I</span><span>M</span><span>I</span><span>T</span>
-  </div>
+  <div id="preloader-root"></div>
 </div>
 
 <div class="grain" aria-hidden="true"></div>
@@ -34,7 +32,7 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="#athletes">Athletes</a></li>
-      <li><a href="https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00" class="nav-cta">Pre-Order</a></li>
+      <li><div id="nav-cta-root"><a href="https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00" class="nav-cta">Pre-Order</a></div></li>
     </ul>
     <button class="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -49,8 +47,8 @@
   <div class="container">
     <div class="hero-text">
       <p class="hero-eyebrow reveal">Olympic-Tested Performance Intelligence</p>
-      <h1 class="hero-headline reveal reveal-delay-1">Train With<br>Muscle-Level<br><em>Intelligence.</em></h1>
-      <p class="hero-body reveal reveal-delay-2">NOLIMIT integrates EMG, motion tracking and AI directly into elite compression wear. Track fatigue. Prevent injury. Unlock performance.</p>
+      <div id="hero-headline-root" class="hero-headline reveal reveal-delay-1"></div>
+      <div id="hero-body-root" class="hero-body reveal reveal-delay-2"></div>
       <div class="hero-actions reveal reveal-delay-3 visible">
         <div id="hero-buttons-root">
           <!-- Fallback if React fails to load -->
@@ -328,8 +326,7 @@
     <h2 class="cta-headline reveal">Upgrade Your<br>Training.</h2>
     <p class="cta-subtitle reveal reveal-delay-1">Unlock the performance insights that elite athletes use to get better every day.</p>
     <div class="cta-actions reveal reveal-delay-2">
-      <a href="https://buy.stripe.com/7sY14naEK1B15EG1ltaZi00" class="btn btn-green">Join the Founders Edition</a>
-      <a href="mailto:contact@nolimit.pro" class="btn">Contact Us</a>
+      <div id="cta-buttons-root"></div>
     </div>
     <ul class="cta-checklist reveal reveal-delay-3">
       <li>

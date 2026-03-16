@@ -7,7 +7,7 @@ if (preloader) {
     preloader.classList.add('fade-out');
     document.body.classList.remove('preloader-active');
     setTimeout(() => { preloader.style.display = 'none'; }, 650);
-  }, 5500);
+  }, 3000);
 }
 
 /* ══════════════════════════════════════════

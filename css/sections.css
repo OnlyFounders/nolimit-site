@@ -103,6 +103,25 @@
   color: var(--text-primary);
   margin-bottom: 28px;
 }
+.hero-headline h1 {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+  margin: 0;
+}
+/* First two lines: white (match reference) */
+.hero-headline h1 .block,
+.hero-headline h1 .overflow-hidden {
+  color: var(--text-primary);
+}
+/* Last line only: green + italic (match reference) */
+.hero-headline h1 .block:last-child,
+.hero-headline h1 .overflow-hidden:last-child {
+  font-style: italic;
+  color: var(--accent-green);
+}
 .hero-headline em {
   font-style: italic;
   color: var(--accent-green);
@@ -114,6 +133,13 @@
   line-height: 1.75;
   max-width: 480px;
   margin-bottom: 40px;
+}
+.hero-body p {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
 }
 .hero-actions {
   display: flex;
