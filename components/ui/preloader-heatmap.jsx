@@ -28,8 +28,8 @@ export function PreloaderHeatmap() {
           innerGlow={0.55}
           outerGlow={0.48}
           speed={1.1}
-          scale={0.85}
-          offsetY={-0.05}
+          scale={0.38}
+          offsetY={-0.02}
           width={1280}
           height={720}
           style={{
