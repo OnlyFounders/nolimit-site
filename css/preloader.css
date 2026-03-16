@@ -29,7 +29,7 @@ body.preloader-active { overflow: hidden; }
 }
 
 .preloader-logo {
-  max-width: clamp(120px, 20vw, 200px);
+  max-width: clamp(180px, 35vw, 320px);
   height: auto;
   object-fit: contain;
   opacity: 0;
