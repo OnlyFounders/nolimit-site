@@ -25,6 +25,7 @@ export function PreloaderHeatmap() {
           contour={0.6}
           angle={0}
           noise={0.05}
+          frame={-2800}
           innerGlow={0.55}
           outerGlow={0.30}
           speed={1.1}
