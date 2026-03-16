@@ -94,17 +94,72 @@
       <div class="glass-card reveal">
         <h3 class="card-title">Muscle Activation Feedback</h3>
         <p class="card-desc">Visualize which muscles activate most during each exercise with real-time EMG data.</p>
-        <div class="emg-wave">
-          <svg viewBox="0 0 400 64" preserveAspectRatio="none">
+        <div class="emg-wave emg-wave-fatigue">
+          <svg viewBox="0 0 400 88" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="wave-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#4ade80" stop-opacity="0.35"/>
-                <stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>
+              <linearGradient id="wave-state-gradient" x1="0" y1="88" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4ade80"/>
+                <stop offset="35%" stop-color="#86efac"/>
+                <stop offset="55%" stop-color="#facc15"/>
+                <stop offset="75%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#ef4444"/>
+              </linearGradient>
+              <linearGradient id="wave-fill-state" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ef4444" stop-opacity="0.08"/>
+                <stop offset="40%" stop-color="#facc15" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#4ade80" stop-opacity="0.2"/>
               </linearGradient>
             </defs>
-            <path class="wave-fill" d="M0,38 C8,38 12,34 18,28 C24,22 28,42 34,52 C40,60 44,10 52,4 C60,-2 64,48 72,58 C80,62 84,30 92,20 C100,10 104,50 112,56 C120,60 124,8 132,2 C140,-4 144,54 152,60 C160,62 164,22 172,14 C180,6 184,46 192,54 C200,58 204,12 212,4 C220,-2 224,44 232,52 C240,58 244,18 252,8 C260,0 264,48 272,56 C280,60 284,14 292,6 C300,0 304,40 312,50 C320,56 324,24 332,16 C340,8 344,44 352,54 C360,58 364,20 372,12 C380,6 388,32 400,38 L400,64 L0,64 Z"/>
-            <path class="wave-line" d="M0,38 C8,38 12,34 18,28 C24,22 28,42 34,52 C40,60 44,10 52,4 C60,-2 64,48 72,58 C80,62 84,30 92,20 C100,10 104,50 112,56 C120,60 124,8 132,2 C140,-4 144,54 152,60 C160,62 164,22 172,14 C180,6 184,46 192,54 C200,58 204,12 212,4 C220,-2 224,44 232,52 C240,58 244,18 252,8 C260,0 264,48 272,56 C280,60 284,14 292,6 C300,0 304,40 312,50 C320,56 324,24 332,16 C340,8 344,44 352,54 C360,58 364,20 372,12 C380,6 388,32 400,38"/>
+            <!-- Target activation zone (1.0×–1.2×) -->
+            <rect class="wave-target-zone" x="0" y="40" width="400" height="24" rx="2"/>
+            <!-- Baseline (1.0×) -->
+            <line class="wave-baseline" x1="0" y1="52" x2="400" y2="52"/>
+            <text class="wave-baseline-label" x="8" y="50">1.0× baseline</text>
+            <!-- Wave -->
+            <path class="wave-fill wave-fill-fatigue" d="M0,52 C12,52 18,40 28,32 C38,24 44,60 52,52 C60,44 68,16 78,12 C88,8 96,56 106,48 C116,40 124,22 134,28 C144,34 152,62 162,54 C172,46 180,18 190,24 C200,30 208,58 218,50 C228,42 236,20 246,26 C256,32 264,54 274,46 C284,38 292,24 302,30 C312,36 320,52 330,44 C340,36 350,28 360,34 C370,40 378,56 388,48 C398,40 400,52 400,88 L0,88 Z"/>
+            <path class="wave-line wave-line-fatigue" d="M0,52 C12,52 18,40 28,32 C38,24 44,60 52,52 C60,44 68,16 78,12 C88,8 96,56 106,48 C116,40 124,22 134,28 C144,34 152,62 162,54 C172,46 180,18 190,24 C200,30 208,58 218,50 C228,42 236,20 246,26 C256,32 264,54 274,46 C284,38 292,24 302,30 C312,36 320,52 330,44 C340,36 350,28 360,34 C370,40 378,56 388,48 C398,40 400,52"/>
+            <!-- Peak markers: only notable events (color = state) -->
+            <circle class="peak-marker peak-on-target" cx="52" cy="52" r="3.5"/>
+            <text class="peak-label peak-label-green" x="52" y="72">1.2× on target</text>
+            <circle class="peak-marker peak-high-safe" cx="162" cy="54" r="3.5"/>
+            <text class="peak-label peak-label-yellow" x="162" y="74">1.3× high</text>
+            <circle class="peak-marker peak-excessive" cx="78" cy="12" r="3.5"/>
+            <text class="peak-label peak-label-red" x="78" y="8">1.6× risk</text>
           </svg>
+        </div>
+        <div class="muscle-meter">
+          <div class="muscle-meter-row">
+            <span class="muscle-meter-label">Quad</span>
+            <div class="muscle-meter-bar">
+              <div class="muscle-meter-fill muscle-fill-85 muscle-intensity-high"></div>
+              <span class="muscle-target-tick" style="left: 90%"></span>
+            </div>
+            <span class="muscle-meter-val">85%<span class="muscle-target">/90%</span></span>
+          </div>
+          <div class="muscle-meter-row">
+            <span class="muscle-meter-label">Glute</span>
+            <div class="muscle-meter-bar">
+              <div class="muscle-meter-fill muscle-fill-78 muscle-intensity-mid"></div>
+              <span class="muscle-target-tick" style="left: 85%"></span>
+            </div>
+            <span class="muscle-meter-val">78%<span class="muscle-target">/85%</span></span>
+          </div>
+          <div class="muscle-meter-row">
+            <span class="muscle-meter-label">Hamstring</span>
+            <div class="muscle-meter-bar">
+              <div class="muscle-meter-fill muscle-fill-62 muscle-intensity-low"></div>
+              <span class="muscle-target-tick" style="left: 70%"></span>
+            </div>
+            <span class="muscle-meter-val">62%<span class="muscle-target">/70%</span></span>
+          </div>
+          <div class="muscle-meter-row">
+            <span class="muscle-meter-label">Calf</span>
+            <div class="muscle-meter-bar">
+              <div class="muscle-meter-fill muscle-fill-45 muscle-intensity-lowest"></div>
+              <span class="muscle-target-tick" style="left: 50%"></span>
+            </div>
+            <span class="muscle-meter-val">45%<span class="muscle-target">/50%</span></span>
+          </div>
         </div>
         <div class="card-stat">
           <span class="card-stat-label">Muscle Activation</span>

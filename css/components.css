@@ -241,6 +241,110 @@
   opacity: 0.3;
 }
 
+/* ── EMG wave: state-coded (green=on target, yellow=high safe, red=excessive) ── */
+.emg-wave-fatigue {
+  height: 104px;
+  margin-bottom: 16px;
+}
+.emg-wave-fatigue .wave-target-zone {
+  fill: rgba(74, 222, 128, 0.12);
+  stroke: rgba(74, 222, 128, 0.2);
+  stroke-width: 0.5;
+}
+.emg-wave-fatigue .wave-baseline {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+.emg-wave-fatigue .wave-baseline-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--text-muted);
+}
+.emg-wave-fatigue .wave-line-fatigue {
+  stroke: url(#wave-state-gradient);
+  stroke-width: 2.5;
+  fill: none;
+  filter: none;
+}
+.emg-wave-fatigue .wave-fill-fatigue {
+  fill: url(#wave-fill-state);
+  opacity: 0.6;
+}
+.emg-wave-fatigue .peak-marker {
+  stroke-width: 1.5;
+}
+.emg-wave-fatigue .peak-on-target {
+  fill: var(--accent-green);
+  stroke: rgba(74, 222, 128, 0.6);
+}
+.emg-wave-fatigue .peak-high-safe {
+  fill: #facc15;
+  stroke: rgba(250, 204, 21, 0.6);
+}
+.emg-wave-fatigue .peak-excessive {
+  fill: var(--accent-red);
+  stroke: rgba(239, 68, 68, 0.6);
+}
+.emg-wave-fatigue .peak-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+.peak-label-green { fill: var(--accent-green); }
+.peak-label-yellow { fill: #facc15; }
+.peak-label-red { fill: var(--accent-red); }
+
+/* ── Muscle meter bars (sorted by activation, target ticks) ── */
+.muscle-meter {
+  margin-bottom: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.muscle-meter-row {
+  display: grid;
+  grid-template-columns: 72px 1fr 52px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.muscle-meter-row:last-child { margin-bottom: 0; }
+.muscle-meter-label { color: var(--text-dim); }
+.muscle-meter-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+  overflow: visible;
+  position: relative;
+}
+.muscle-meter-fill {
+  height: 100%;
+  border-radius: 4px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.muscle-intensity-high { background: linear-gradient(90deg, #22c55e, var(--accent-green)); }
+.muscle-intensity-mid { background: linear-gradient(90deg, #4ade80, #86efac); }
+.muscle-intensity-low { background: linear-gradient(90deg, #86efac, #bbf7d0); }
+.muscle-intensity-lowest { background: linear-gradient(90deg, #86efac, #bbf7d0); opacity: 0.85; }
+.muscle-target-tick {
+  position: absolute;
+  top: -2px;
+  width: 2px;
+  height: 12px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: left 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.visible .muscle-fill-85 { width: 85%; }
+.visible .muscle-fill-62 { width: 62%; }
+.visible .muscle-fill-78 { width: 78%; }
+.visible .muscle-fill-45 { width: 45%; }
+.muscle-meter-val { color: var(--text-muted); font-weight: 600; text-align: right; }
+.muscle-meter-val .muscle-target { color: var(--text-dim); font-weight: 400; font-size: 10px; margin-left: 1px; }
+
 /* ── Card stats ── */
 .card-stat {
   display: flex;
