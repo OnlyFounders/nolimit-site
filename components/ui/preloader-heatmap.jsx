@@ -26,7 +26,7 @@ export function PreloaderHeatmap() {
           angle={0}
           noise={0.05}
           innerGlow={0.55}
-          outerGlow={0.48}
+          outerGlow={0.25}
           speed={1.1}
           scale={0.38}
           offsetY={-0.02}
