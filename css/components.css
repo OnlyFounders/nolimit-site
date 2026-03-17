@@ -233,6 +233,12 @@
 .bar-visualizer-bar[data-highlighted="true"] {
   background: var(--accent-green);
 }
+.bar-visualizer-bar[data-state="initializing"] {
+  background: rgba(255,255,255,0.1);
+}
+.bar-visualizer-bar[data-state="initializing"][data-highlighted="true"] {
+  background: var(--accent-red);
+}
 .bar-visualizer-bar[data-state="speaking"] {
   background: var(--accent-green);
 }
