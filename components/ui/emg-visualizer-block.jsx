@@ -3,6 +3,41 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BarVisualizer } from "./bar-visualizer.jsx";
+import { SlidingNumber } from "./sliding-number.jsx";
+
+const COUNT_DURATION = 1200;
+
+function AnimatedValue({ target, active }) {
+  const [value, setValue] = useState(0);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    if (!active) {
+      setValue(0);
+      return;
+    }
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const progress = Math.min(elapsed / COUNT_DURATION, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(eased * target));
+      if (progress < 1) rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(step);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [active, target]);
+
+  if (!active) return null;
+
+  return (
+    <>
+      <SlidingNumber value={value} />
+      <span>%</span>
+    </>
+  );
+}
 
 const LOOP_STATES = ["initializing", "listening", "connecting", "speaking", "thinking", "total"];
 const STATE_DURATION_MS = 2500;
@@ -131,7 +166,7 @@ export function EmgVisualizerBlock() {
                   {muscleLabel}
                 </span>
                 <span className={`step-progress-value ${stepStatus === "complete" ? "step-value-active" : ""}`}>
-                  {stepStatus === "complete" ? `${MUSCLE_VALUES[i]}%` : ""}
+                  <AnimatedValue target={MUSCLE_VALUES[i]} active={stepStatus === "complete"} />
                 </span>
               </div>
             </div>
@@ -145,7 +180,7 @@ export function EmgVisualizerBlock() {
           className="card-stat-value stat-green card-stat-total"
           style={{ opacity: currentStep >= 5 ? 1 : 0, transition: "opacity 0.6s ease" }}
         >
-          61%
+          <AnimatedValue target={61} active={currentStep >= 5} />
         </span>
       </div>
     </div>
