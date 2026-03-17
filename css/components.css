@@ -192,6 +192,7 @@
   height: auto;
   padding: 0;
   min-height: 140px;
+  overflow: hidden;
 }
 #emg-visualizer-root.emg-wave::before,
 #emg-visualizer-root.emg-wave::after {
@@ -201,6 +202,7 @@
 /* Bar visualizer */
 .emg-visualizer-block {
   padding: 16px;
+  overflow: hidden;
 }
 .bar-visualizer {
   display: flex;
@@ -208,19 +210,25 @@
   align-items: flex-end;
   gap: 6px;
   height: 96px;
+  min-height: 96px;
+  max-height: 96px;
   width: 100%;
+  box-sizing: border-box;
   border-radius: 8px;
   background: rgba(255,255,255,0.03);
   padding: 12px 16px;
   margin-bottom: 12px;
+  overflow: hidden;
 }
 .bar-visualizer-bar {
   min-width: 8px;
   max-width: 12px;
   flex: 1;
+  max-height: 100%;
   border-radius: 9999px;
   background: rgba(255,255,255,0.15);
   transition: height 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
 }
 .bar-visualizer-bar[data-highlighted="true"] {
   background: var(--accent-green);
