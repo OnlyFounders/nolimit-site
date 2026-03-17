@@ -429,87 +429,153 @@
 .peak-label-yellow { fill: #facc15; }
 .peak-label-red { fill: var(--accent-red); }
 
-/* ── Step progress (vertical stepper) ── */
+/* ── Step progress (vertical stepper — roiui card-progress port) ── */
 .step-progress {
   display: flex;
   flex-direction: column;
+  gap: 1px;
   padding: 12px 4px 4px;
   margin-bottom: 12px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 .step-progress-item {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  min-height: 36px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  min-height: 32px;
 }
 .step-progress-indicator {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  width: 22px;
+  width: 20px;
 }
-.step-progress-circle {
-  width: 22px;
-  height: 22px;
+
+/* Circle wrapper (holds spinner + circle) */
+.step-circle-wrap {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Spinner overlay */
+.step-spinner {
+  position: absolute;
+  inset: 0;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-top-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.04);
+  animation: step-spin 1s linear infinite;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+.step-spinner-out {
+  opacity: 0;
+}
+@keyframes step-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Circle base */
+.step-progress-circle {
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.04);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: border-color 0.4s ease, background 0.4s ease;
   color: transparent;
 }
+
+/* Complete (non-final): foreground-filled circle */
 .step-progress-circle.step-completed {
-  border-color: var(--accent-green);
-  background: rgba(74, 222, 128, 0.15);
-  color: var(--accent-green);
+  border-color: transparent;
+  background: var(--text-primary);
+  color: var(--bg-deep);
+  animation: step-circle-reveal 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
-.step-progress-line {
-  width: 1.5px;
-  flex: 1;
-  min-height: 14px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 1px;
-  overflow: hidden;
-}
-.step-progress-line-fill {
-  width: 100%;
-  height: 0%;
+
+/* Complete (final step, all done): green circle */
+.step-progress-circle.step-completed-final {
+  border-color: transparent;
   background: var(--accent-green);
-  border-radius: 1px;
-  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--bg-deep);
+  animation: step-circle-reveal 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
+
+@keyframes step-circle-reveal {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Connecting line */
+.step-progress-line {
+  width: 1px;
+  flex: 1;
+  min-height: 10px;
+  background: rgba(255,255,255,0.1);
+  transition: background 0.3s ease;
+}
+.step-line-done {
+  background: var(--text-primary);
+}
+
+/* Content row */
 .step-progress-content {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   flex: 1;
-  min-height: 22px;
-  padding-top: 2px;
+  min-height: 20px;
+  padding-top: 1px;
 }
+
+/* Label states */
 .step-progress-label {
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   color: rgba(255,255,255,0.35);
-  transition: color 0.4s ease;
+  transition: color 0.3s ease;
   line-height: 1.3;
 }
-.step-label-active {
-  color: var(--text-primary);
+.step-label-shimmer {
+  color: var(--text-muted);
+  background: linear-gradient(90deg, var(--text-muted) 0%, var(--text-muted) 40%, rgba(255,255,255,0.7) 50%, var(--text-muted) 60%, var(--text-muted) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: step-shimmer 2s linear infinite;
 }
+.step-label-done {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Value */
 .step-progress-value {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255,255,255,0.2);
+  color: transparent;
   transition: color 0.4s ease;
   flex-shrink: 0;
   margin-left: 8px;
+  min-width: 28px;
+  text-align: right;
 }
 .step-value-active {
   color: var(--accent-green);

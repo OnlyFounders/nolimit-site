@@ -83,47 +83,57 @@ export function EmgVisualizerBlock() {
 
       <div className="step-progress">
         {MUSCLE_LABELS.map((muscleLabel, i) => {
-          const completed = currentStep >= i + 1;
+          const stepStatus =
+            currentStep > i + 1 ? "complete" :
+            currentStep === i + 1 ? "in_progress" :
+            "pending";
           const isLast = i === MUSCLE_LABELS.length - 1;
+          const isFinal = isLast && currentStep >= 5;
+
           return (
             <div key={muscleLabel} className="step-progress-item">
               <div className="step-progress-indicator">
-                <div className={`step-progress-circle ${completed ? "step-completed" : ""}`}>
-                  {completed && (
-                    <motion.svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                    >
-                      <path
-                        d="M2.5 6L5 8.5L9.5 3.5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </motion.svg>
+                <div className="step-circle-wrap">
+                  {(stepStatus === "in_progress" || stepStatus === "complete") && (
+                    <div className={`step-spinner ${stepStatus === "complete" ? "step-spinner-out" : ""}`} />
                   )}
+                  <div className={`step-progress-circle${
+                    stepStatus === "complete" ? (isFinal ? " step-completed-final" : " step-completed") : ""
+                  }`}>
+                    {stepStatus === "complete" && (
+                      <motion.svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.15, delay: 0.05, ease: [0.165, 0.84, 0.44, 1] }}
+                      >
+                        <path
+                          d="M2.5 6L5 8.5L9.5 3.5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </motion.svg>
+                    )}
+                  </div>
                 </div>
                 {!isLast && (
-                  <div className="step-progress-line">
-                    <div
-                      className="step-progress-line-fill"
-                      style={{ height: completed ? "100%" : "0%" }}
-                    />
-                  </div>
+                  <div className={`step-progress-line ${stepStatus === "complete" ? "step-line-done" : ""}`} />
                 )}
               </div>
               <div className="step-progress-content">
-                <span className={`step-progress-label ${completed ? "step-label-active" : ""}`}>
+                <span className={`step-progress-label${
+                  stepStatus === "in_progress" ? " step-label-shimmer" :
+                  stepStatus === "complete" ? " step-label-done" : ""
+                }`}>
                   {muscleLabel}
                 </span>
-                <span className={`step-progress-value ${completed ? "step-value-active" : ""}`}>
-                  {completed ? `${MUSCLE_VALUES[i]}%` : "—"}
+                <span className={`step-progress-value ${stepStatus === "complete" ? "step-value-active" : ""}`}>
+                  {stepStatus === "complete" ? `${MUSCLE_VALUES[i]}%` : ""}
                 </span>
               </div>
             </div>
