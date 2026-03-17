@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BarVisualizer, AGENT_STATES } from "./bar-visualizer.jsx";
+import { BarVisualizer } from "./bar-visualizer.jsx";
 
 const LOOP_STATES = ["initializing", "listening", "connecting", "speaking", "thinking"];
 const STATE_DURATION_MS = 2500;
@@ -38,7 +38,7 @@ export function EmgVisualizerBlock() {
         className="emg-bar-visualizer"
       />
       <div className="emg-visualizer-buttons">
-        {AGENT_STATES.map((s) => (
+        {LOOP_STATES.map((s) => (
           <button
             key={s}
             type="button"
