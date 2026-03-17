@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { BarVisualizer } from "./bar-visualizer.jsx";
-import { BlurredStagger } from "./blurred-stagger-text.jsx";
-import { ShiningText } from "./shining-text.jsx";
 
 const LOOP_STATES = ["initializing", "listening", "connecting", "speaking", "thinking", "total"];
 const STATE_DURATION_MS = 2500;
@@ -66,12 +65,19 @@ export function EmgVisualizerBlock() {
         className="emg-bar-visualizer"
       />
       <div className="emg-visualizer-buttons" data-state={state}>
-        <span className="emg-visualizer-step-label">
-          {isTransitioning ? (
-            <BlurredStagger text={label} />
-          ) : (
-            <ShiningText variant={state === "initializing" ? "red" : "green"}>{label}</ShiningText>
-          )}
+        <span className={`emg-visualizer-step-label ${!isTransitioning ? "emg-step-shimmer" : ""}`}>
+          <AnimatePresence mode="popLayout">
+            <motion.span
+              key={state}
+              initial={{ y: 16, opacity: 0, filter: "blur(4px)" }}
+              animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+              exit={{ y: -16, opacity: 0, filter: "blur(4px)" }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="emg-step-text"
+            >
+              {label}
+            </motion.span>
+          </AnimatePresence>
         </span>
       </div>
 

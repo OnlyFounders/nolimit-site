@@ -264,18 +264,43 @@
   border-radius: 6px;
   background: rgba(74, 222, 128, 0.08);
   border: 1px solid rgba(74, 222, 128, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-height: 1.4em;
+  display: inline-flex;
+  align-items: center;
+}
+.emg-step-text {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.emg-step-shimmer .emg-step-text {
+  background: linear-gradient(110deg, var(--accent-green) 35%, #fff 50%, var(--accent-green) 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: step-shimmer 2s linear infinite;
+}
+@keyframes step-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 .emg-visualizer-buttons[data-state="initializing"] .emg-visualizer-step-label {
   color: var(--accent-red);
   background: rgba(239, 68, 68, 0.08);
   border-color: rgba(239, 68, 68, 0.2);
 }
-.shining-text {
-  animation: shining-move 2s linear infinite;
-}
-@keyframes shining-move {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.emg-visualizer-buttons[data-state="initializing"] .emg-step-shimmer .emg-step-text {
+  background: linear-gradient(110deg, var(--accent-red) 35%, #fca5a5 50%, var(--accent-red) 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: step-shimmer 2s linear infinite;
 }
 .emg-visualizer-btn {
   font-family: var(--font-mono);
