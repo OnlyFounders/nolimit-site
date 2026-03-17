@@ -1,6 +1,7 @@
 import "./js/main.js";
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { EmgVisualizerBlock } from "./components/ui/emg-visualizer-block.jsx";
 import { LiquidMetalButton } from "./components/ui/liquid-metal-button.jsx";
 import { PreloaderHeatmap } from "./components/ui/preloader-heatmap.jsx";
 import { ScarcityTag } from "./components/ui/scarcity-tag.jsx";
@@ -142,6 +143,12 @@ function mount() {
   if (scarcityEl) {
     scarcityEl.innerHTML = "";
     createRoot(scarcityEl).render(<ScarcityTag />);
+  }
+
+  const emgEl = document.getElementById("emg-visualizer-root");
+  if (emgEl) {
+    emgEl.innerHTML = "";
+    createRoot(emgEl).render(<EmgVisualizerBlock />);
   }
 
   const navEl = document.getElementById("nav-cta-root");
