@@ -81,28 +81,51 @@ export function EmgVisualizerBlock() {
         </span>
       </div>
 
-      <div className="muscle-meter">
-        {MUSCLE_LABELS.map((label, i) => {
-          const revealed = currentStep >= i + 1;
-          const fillPct = revealed ? MUSCLE_VALUES[i] : 0;
-          const intensityClass =
-            fillPct >= 70
-              ? "muscle-intensity-high"
-              : fillPct >= 40
-                ? "muscle-intensity-mid"
-                : fillPct >= 20
-                  ? "muscle-intensity-low"
-                  : "muscle-intensity-lowest";
+      <div className="step-progress">
+        {MUSCLE_LABELS.map((muscleLabel, i) => {
+          const completed = currentStep >= i + 1;
+          const isLast = i === MUSCLE_LABELS.length - 1;
           return (
-            <div key={label} className="muscle-meter-row">
-              <span className="muscle-meter-label">{label}</span>
-              <div className="muscle-meter-bar">
-                <div
-                  className={`muscle-meter-fill ${intensityClass}`}
-                  style={{ width: `${fillPct}%` }}
-                />
+            <div key={muscleLabel} className="step-progress-item">
+              <div className="step-progress-indicator">
+                <div className={`step-progress-circle ${completed ? "step-completed" : ""}`}>
+                  {completed && (
+                    <motion.svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                    >
+                      <path
+                        d="M2.5 6L5 8.5L9.5 3.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </motion.svg>
+                  )}
+                </div>
+                {!isLast && (
+                  <div className="step-progress-line">
+                    <div
+                      className="step-progress-line-fill"
+                      style={{ height: completed ? "100%" : "0%" }}
+                    />
+                  </div>
+                )}
               </div>
-              <span className="muscle-meter-val">{revealed ? `${MUSCLE_VALUES[i]}%` : "—"}</span>
+              <div className="step-progress-content">
+                <span className={`step-progress-label ${completed ? "step-label-active" : ""}`}>
+                  {muscleLabel}
+                </span>
+                <span className={`step-progress-value ${completed ? "step-value-active" : ""}`}>
+                  {completed ? `${MUSCLE_VALUES[i]}%` : "—"}
+                </span>
+              </div>
             </div>
           );
         })}

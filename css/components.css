@@ -429,56 +429,91 @@
 .peak-label-yellow { fill: #facc15; }
 .peak-label-red { fill: var(--accent-red); }
 
-/* ── Muscle meter bars (sorted by activation, target ticks) ── */
-.muscle-meter {
-  margin-bottom: 16px;
-  padding-top: 12px;
+/* ── Step progress (vertical stepper) ── */
+.step-progress {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 4px 4px;
+  margin-bottom: 12px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
-.muscle-meter-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 48px;
+.step-progress-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 36px;
+}
+.step-progress-indicator {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  flex-shrink: 0;
+  width: 22px;
 }
-.muscle-meter-row:last-child { margin-bottom: 0; }
-.muscle-meter-label { color: var(--text-dim); }
-.muscle-meter-bar {
-  height: 8px;
-  border-radius: 4px;
-  background: rgba(255,255,255,0.06);
-  overflow: visible;
-  position: relative;
+.step-progress-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.4s ease, background 0.4s ease;
+  color: transparent;
 }
-.muscle-meter-fill {
-  height: 100%;
-  border-radius: 4px;
-  width: 0%;
-  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+.step-progress-circle.step-completed {
+  border-color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--accent-green);
 }
-.muscle-intensity-high { background: linear-gradient(90deg, #22c55e, var(--accent-green)); }
-.muscle-intensity-mid { background: linear-gradient(90deg, #4ade80, #86efac); }
-.muscle-intensity-low { background: linear-gradient(90deg, #86efac, #bbf7d0); }
-.muscle-intensity-lowest { background: linear-gradient(90deg, #86efac, #bbf7d0); opacity: 0.85; }
-.muscle-target-tick {
-  position: absolute;
-  top: -2px;
-  width: 2px;
-  height: 12px;
-  background: rgba(255,255,255,0.5);
+.step-progress-line {
+  width: 1.5px;
+  flex: 1;
+  min-height: 14px;
+  background: rgba(255,255,255,0.1);
   border-radius: 1px;
-  transform: translateX(-50%);
-  transition: left 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
-.visible .muscle-fill-85 { width: 85%; }
-.visible .muscle-fill-62 { width: 62%; }
-.visible .muscle-fill-78 { width: 78%; }
-.visible .muscle-fill-45 { width: 45%; }
-.muscle-meter-val { color: var(--text-muted); font-weight: 600; text-align: right; }
-.muscle-meter-val .muscle-target { color: var(--text-dim); font-weight: 400; font-size: 10px; margin-left: 1px; }
+.step-progress-line-fill {
+  width: 100%;
+  height: 0%;
+  background: var(--accent-green);
+  border-radius: 1px;
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.step-progress-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex: 1;
+  min-height: 22px;
+  padding-top: 2px;
+}
+.step-progress-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.35);
+  transition: color 0.4s ease;
+  line-height: 1.3;
+}
+.step-label-active {
+  color: var(--text-primary);
+}
+.step-progress-value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.2);
+  transition: color 0.4s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.step-value-active {
+  color: var(--accent-green);
+}
 
 /* ── Card stats ── */
 .card-stat {
