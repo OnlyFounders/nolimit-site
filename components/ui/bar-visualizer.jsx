@@ -154,7 +154,7 @@ export function BarVisualizer({
           Math.max(minHeight, volume * 100 + 5)
         );
         const isHighlighted = highlightedIndices?.includes(index) ?? false;
-        const barHeightPx = (heightPct / 100) * 72;
+        const barHeightPx = (heightPct / 100) * 64;
 
         return (
           <div
