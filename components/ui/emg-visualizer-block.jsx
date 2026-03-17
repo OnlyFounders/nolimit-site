@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { BarVisualizer, AGENT_STATES } from "./bar-visualizer.jsx";
 
-const LOOP_STATES = ["initializing", "connecting", "listening", "speaking", "thinking"];
+const LOOP_STATES = ["initializing", "listening", "connecting", "speaking", "thinking"];
 const STATE_DURATION_MS = 2500;
 
 export function EmgVisualizerBlock() {
