@@ -6,6 +6,14 @@ import { BarVisualizer, AGENT_STATES } from "./bar-visualizer.jsx";
 const LOOP_STATES = ["initializing", "listening", "connecting", "speaking", "thinking"];
 const STATE_DURATION_MS = 2500;
 
+const STATE_LABELS = {
+  initializing: "Initializing",
+  listening: "Quad Vastus Medialis",
+  connecting: "Quad, Rectus Femoris",
+  speaking: "Hamstring, Biceps Femoris",
+  thinking: "Hamstring Semitendinosus",
+};
+
 export function EmgVisualizerBlock() {
   const [state, setState] = useState("initializing");
 
@@ -37,7 +45,7 @@ export function EmgVisualizerBlock() {
             className={`emg-visualizer-btn ${state === s ? "emg-visualizer-btn-active" : ""}`}
             onClick={() => setState(s)}
           >
-            {s.charAt(0).toUpperCase() + s.slice(1)}
+            {STATE_LABELS[s]}
           </button>
         ))}
       </div>

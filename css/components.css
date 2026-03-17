@@ -391,7 +391,7 @@
 }
 .muscle-meter-row {
   display: grid;
-  grid-template-columns: 72px 1fr 52px;
+  grid-template-columns: 1fr 1fr 48px;
   align-items: center;
   gap: 10px;
   margin-bottom: 8px;
