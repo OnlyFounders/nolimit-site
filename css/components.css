@@ -433,7 +433,7 @@
 .step-progress {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0;
   padding: 12px 4px 4px;
   margin-bottom: 12px;
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -443,16 +443,22 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 6px 8px;
+  padding: 8px 8px;
   border-radius: 8px;
-  min-height: 32px;
 }
-.step-progress-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  width: 20px;
+
+/* Connecting line — absolutely positioned to bridge between circles */
+.step-progress-line {
+  position: absolute;
+  left: 18px;
+  top: 28px;
+  width: 1px;
+  height: calc(100% - 16px);
+  background: rgba(255,255,255,0.1);
+  transition: background 0.3s ease;
+}
+.step-line-done {
+  background: var(--text-primary);
 }
 
 /* Circle wrapper (holds spinner + circle) */
@@ -519,18 +525,6 @@
 @keyframes step-circle-reveal {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
-}
-
-/* Connecting line */
-.step-progress-line {
-  width: 1px;
-  flex: 1;
-  min-height: 10px;
-  background: rgba(255,255,255,0.1);
-  transition: background 0.3s ease;
-}
-.step-line-done {
-  background: var(--text-primary);
 }
 
 /* Content row */

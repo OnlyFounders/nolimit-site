@@ -92,38 +92,36 @@ export function EmgVisualizerBlock() {
 
           return (
             <div key={muscleLabel} className="step-progress-item">
-              <div className="step-progress-indicator">
-                <div className="step-circle-wrap">
-                  {(stepStatus === "in_progress" || stepStatus === "complete") && (
-                    <div className={`step-spinner ${stepStatus === "complete" ? "step-spinner-out" : ""}`} />
-                  )}
-                  <div className={`step-progress-circle${
-                    stepStatus === "complete" ? (isFinal ? " step-completed-final" : " step-completed") : ""
-                  }`}>
-                    {stepStatus === "complete" && (
-                      <motion.svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.15, delay: 0.05, ease: [0.165, 0.84, 0.44, 1] }}
-                      >
-                        <path
-                          d="M2.5 6L5 8.5L9.5 3.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </motion.svg>
-                    )}
-                  </div>
-                </div>
-                {!isLast && (
-                  <div className={`step-progress-line ${stepStatus === "complete" ? "step-line-done" : ""}`} />
+              {!isLast && (
+                <div className={`step-progress-line ${stepStatus === "complete" ? "step-line-done" : ""}`} />
+              )}
+              <div className="step-circle-wrap">
+                {(stepStatus === "in_progress" || stepStatus === "complete") && (
+                  <div className={`step-spinner ${stepStatus === "complete" ? "step-spinner-out" : ""}`} />
                 )}
+                <div className={`step-progress-circle${
+                  stepStatus === "complete" ? (isFinal ? " step-completed-final" : " step-completed") : ""
+                }`}>
+                  {stepStatus === "complete" && (
+                    <motion.svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.15, delay: 0.05, ease: [0.165, 0.84, 0.44, 1] }}
+                    >
+                      <path
+                        d="M2.5 6L5 8.5L9.5 3.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </motion.svg>
+                  )}
+                </div>
               </div>
               <div className="step-progress-content">
                 <span className={`step-progress-label${
