@@ -37,17 +37,8 @@ export function EmgVisualizerBlock() {
         maxHeight={90}
         className="emg-bar-visualizer"
       />
-      <div className="emg-visualizer-buttons">
-        {LOOP_STATES.map((s) => (
-          <button
-            key={s}
-            type="button"
-            className={`emg-visualizer-btn ${state === s ? "emg-visualizer-btn-active" : ""}`}
-            onClick={() => setState(s)}
-          >
-            {STATE_LABELS[s]}
-          </button>
-        ))}
+      <div className="emg-visualizer-buttons" data-state={state}>
+        <span className="emg-visualizer-step-label">{STATE_LABELS[state]}</span>
       </div>
     </div>
   );

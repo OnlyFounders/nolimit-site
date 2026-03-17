@@ -252,9 +252,23 @@
 
 .emg-visualizer-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   justify-content: center;
+  align-items: center;
+}
+.emg-visualizer-step-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-green);
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+.emg-visualizer-buttons[data-state="initializing"] .emg-visualizer-step-label {
+  color: var(--accent-red);
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
 }
 .emg-visualizer-btn {
   font-family: var(--font-mono);
