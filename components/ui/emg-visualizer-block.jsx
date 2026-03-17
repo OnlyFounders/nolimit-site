@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BarVisualizer } from "./bar-visualizer.jsx";
+import { BlurredStagger } from "./blurred-stagger-text.jsx";
+import { ShiningText } from "./shining-text.jsx";
 
 const LOOP_STATES = ["initializing", "listening", "connecting", "speaking", "thinking", "total"];
 const STATE_DURATION_MS = 2500;
@@ -24,9 +26,12 @@ const MUSCLE_LABELS = [
 ];
 
 const STEP_INDEX = { initializing: 0, listening: 1, connecting: 2, speaking: 3, thinking: 4, total: 5 };
+const TRANSITION_DURATION_MS = 1000;
 
 export function EmgVisualizerBlock() {
   const [state, setState] = useState("initializing");
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const stateRef = useRef(state);
 
   useEffect(() => {
     let index = 0;
@@ -38,7 +43,17 @@ export function EmgVisualizerBlock() {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    if (state !== stateRef.current) {
+      stateRef.current = state;
+      setIsTransitioning(true);
+    }
+    const t = setTimeout(() => setIsTransitioning(false), TRANSITION_DURATION_MS);
+    return () => clearTimeout(t);
+  }, [state]);
+
   const currentStep = STEP_INDEX[state];
+  const label = STATE_LABELS[state];
 
   return (
     <div className="emg-visualizer-block">
@@ -51,7 +66,13 @@ export function EmgVisualizerBlock() {
         className="emg-bar-visualizer"
       />
       <div className="emg-visualizer-buttons" data-state={state}>
-        <span className="emg-visualizer-step-label">{STATE_LABELS[state]}</span>
+        <span className="emg-visualizer-step-label">
+          {isTransitioning ? (
+            <BlurredStagger text={label} />
+          ) : (
+            <ShiningText variant={state === "initializing" ? "red" : "green"}>{label}</ShiningText>
+          )}
+        </span>
       </div>
 
       <div className="muscle-meter">

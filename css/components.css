@@ -270,6 +270,13 @@
   background: rgba(239, 68, 68, 0.08);
   border-color: rgba(239, 68, 68, 0.2);
 }
+.shining-text {
+  animation: shining-move 2s linear infinite;
+}
+@keyframes shining-move {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 .emg-visualizer-btn {
   font-family: var(--font-mono);
   font-size: 11px;
